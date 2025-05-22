@@ -1,0 +1,183 @@
+/* Container general */
+.cart-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Titlu */
+.cart-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1a202c;
+}
+
+/* Coș gol */
+.cart-empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: #4a5568;
+}
+
+.cart-empty p {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Butoane */
+.btn {
+    cursor: pointer;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #3182ce;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2b6cb0;
+}
+
+.btn-success {
+    background-color: #38a169;
+    color: white;
+    width: 100%;
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+}
+
+.btn-success:hover {
+    background-color: #2f855a;
+}
+
+/* Box coș */
+.cart-box {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
+}
+
+/* Fiecare produs din coș */
+.cart-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.75rem 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Nume și preț produs */
+.item-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.item-price {
+    color: #718096;
+}
+
+/* Control cantitate */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+/* Butoane plus/minus */
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 0.375rem;
+    border: 1px solid #cbd5e0;
+    background-color: #edf2f7;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4a5568;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.qty-btn:hover {
+    background-color: #e2e8f0;
+}
+
+/* Cantitate */
+.qty-number {
+    width: 32px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    user-select: none;
+}
+
+/* Total per produs */
+.item-total {
+    width: 80px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #2b6cb0;
+}
+
+/* Total general */
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+.total-label {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.total-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #3182ce;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .quantity-control {
+        margin-top: 0.5rem;
+    }
+    .item-total {
+        width: 100%;
+        text-align: left;
+        margin-top: 0.25rem;
+    }
+    .cart-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+}
