@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './Login.css'
 
 function Login({ setIsAuthenticated, isAuthenticated }) {
     const [email, setEmail] = useState('')
@@ -8,7 +9,7 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        // aici poți adăuga validări reale
+        // Aici poți adăuga validări reale
         console.log('Email:', email)
         console.log('Password:', password)
         setIsAuthenticated(true)
@@ -16,32 +17,41 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/products')
+            navigate('/storeMainPage')
         }
     }, [isAuthenticated, navigate])
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email: </label>
+        <div className="login-container">
+            <h2>Autentificare</h2>
+            <form onSubmit={handleLogin} className="login-form">
+                <div className="form-group">
+                    <label>Email:</label>
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        className="form-input"
+                        placeholder="exemplu@email.com"
                     />
                 </div>
-                <div>
-                    <label>Parolă: </label>
+                <div className="form-group">
+                    <label>Parolă:</label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        className="form-input"
+                        placeholder="••••••••"
                     />
                 </div>
-                <button type="submit">Autentifică-te</button>
+                <button type="submit" className="login-button">
+                    Autentifică-te
+                </button>
             </form>
+            <p className="create-account">
+                Nu ai cont? <a href="/register">Creează unul</a>
+            </p>
         </div>
     )
 }

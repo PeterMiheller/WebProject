@@ -1,18 +1,19 @@
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
-import Products from './pages/StoreMainPage'
+import Products from './pages/Products'
+import StoreMainPage from "./pages/StoreMainPage.jsx";
 import Cart from './pages/Cart'
+import Settings from './pages/Settings'
 import Navbar from './components/Navbar'
-import './App.css'
-import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
+import { useState } from 'react'
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     return (
-        <>
-            {/* Navbar se afișează doar dacă utilizatorul e autentificat */}
+        <div className="App">
+            {/* Navbar doar dacă ești logat */}
             {isAuthenticated && <Navbar />}
 
             <Routes>
@@ -25,7 +26,14 @@ function App() {
                         />
                     }
                 />
-
+                <Route
+                    path="/storeMainPage"
+                    element={
+                        <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <StoreMainPage />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route
                     path="/products"
                     element={
@@ -42,8 +50,16 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                <Route
+                    path="/settings"
+                    element={
+                        <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <Settings />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
-        </>
+        </div>
     )
 }
 
