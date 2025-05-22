@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import "./Cart.css";
 
-function Cart() {
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: "Laptop Gaming", price: 2999, quantity: 1 },
-        { id: 2, name: "Smartphone", price: 1499, quantity: 2 },
-    ]);
+function Cart({cartItems,setCartItems}) {
+    // const [cartItems, setCartItems] = useState([
+    //     { id: 1, name: "Laptop Gaming", price: 2999, quantity: 1 },
+    //     { id: 2, name: "Smartphone", price: 1499, quantity: 2 },
+    // ]);
 
     const updateQuantity = (id, newQuantity) => {
         if (newQuantity === 0) {
@@ -22,7 +22,6 @@ function Cart() {
     return (
         <div className="cart-container">
             <h1 className="cart-title">Coșul de Cumpărături</h1>
-
             {cartItems.length === 0 ? (
                 <div className="cart-empty">
                     <p>Coșul tău este gol</p>

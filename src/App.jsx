@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-
+    const [cartItems, setCartItems] = useState([])
     return (
         <div className="App">
             {/* Navbar doar dacă ești logat */}
@@ -38,7 +38,7 @@ function App() {
                     path="/products"
                     element={
                         <ProtectedRoute isAuthenticated={isAuthenticated}>
-                            <Products />
+                            <Products cartItems={cartItems} setCartItems={setCartItems}/>
                         </ProtectedRoute>
                     }
                 />
@@ -46,7 +46,7 @@ function App() {
                     path="/cart"
                     element={
                         <ProtectedRoute isAuthenticated={isAuthenticated}>
-                            <Cart />
+                            <Cart cartItems={cartItems} setCartItems={setCartItems} />
                         </ProtectedRoute>
                     }
                 />

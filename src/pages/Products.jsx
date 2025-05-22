@@ -1,15 +1,29 @@
 import React from "react";
 import "./Products.css";
 
-function Products() {
+function Products({cartItems, setCartItems}) {
     const products = [
-        { id: 1, name: "Laptop Gaming", price: "2.999 lei", image: "/api/placeholder/300/200" },
-        { id: 2, name: "Smartphone", price: "1.499 lei", image: "/api/placeholder/300/200" },
-        { id: 3, name: "Headphones", price: "299 lei", image: "/api/placeholder/300/200" },
-        { id: 4, name: "Smartwatch", price: "799 lei", image: "/api/placeholder/300/200" },
-        { id: 5, name: "Tablet", price: "1.199 lei", image: "/api/placeholder/300/200" },
-        { id: 6, name: "Camera", price: "2.299 lei", image: "/api/placeholder/300/200" },
+        { id: 1, name: "Laptop Gaming", price: 2999, image: "/api/placeholder/300/200" },
+        { id: 2, name: "Smartphone", price: 1499, image: "/api/placeholder/300/200" },
+        { id: 3, name: "Headphones", price: 299, image: "/api/placeholder/300/200" },
+        { id: 4, name: "Smartwatch", price: 799, image: "/api/placeholder/300/200" },
+        { id: 5, name: "Tablet", price: 1.199, image: "/api/placeholder/300/200" },
+        { id: 6, name: "Camera", price: 2.299, image: "/api/placeholder/300/200" },
     ];
+
+    function addToCart(product){
+        const { id, name, price } = product;
+        console.log(product);
+        let quantity;
+        if((quantity = cartItems.find(item => item.id === id)?.quantity)){
+            setCartItems( cartItems.map(item =>
+                item.id === id ? { ...item, quantity: quantity+1 } : item
+            ));
+        }
+        else {
+            setCartItems([...cartItems, {id, name, price, quantity: 1}]);
+        }
+    }
 
     return (
         <div className="products-container">
@@ -21,12 +35,13 @@ function Products() {
                         <img src={product.image} alt={product.name} />
                         <div className="product-info">
                             <h3>{product.name}</h3>
-                            <p className="price">{product.price}</p>
-                            <button className="add-to-cart-btn">Adaugă în Coș</button>
+                            <p className="price">{product.price} lei</p>
+                            <button onClick={()=>addToCart(product)} className="add-to-cart-btn">Adaugă în Coș</button>
                         </div>
                     </div>
                 ))}
             </div>
+
         </div>
     );
 }
