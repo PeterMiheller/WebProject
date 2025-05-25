@@ -6,6 +6,7 @@ import Cart from './pages/Cart'
 import Settings from './pages/Settings'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute'
+import Register from './pages/Register'
 import { useState } from 'react'
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
                             isAuthenticated={isAuthenticated}
                         />
                     }
+                />
+                <Route
+                    path="/register"
+                    element={<Register />}
                 />
                 <Route
                     path="/storeMainPage"

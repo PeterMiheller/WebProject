@@ -109,3 +109,28 @@
 .btn-secondary:hover {
     background-color: #cbd5e1;
 }
+.saved-message {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #b2d8b2;
+    color: #3c763d;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.logout-btn {
+    margin-top: 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+.logout-btn:hover {
+    background-color: #c82333;
+}
+

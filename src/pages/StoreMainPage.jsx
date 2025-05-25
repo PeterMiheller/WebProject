@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./StoreMainPage.css";
 
 function StoreMainPage() {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/products");
+    }
     return (
         <div className="store-container">
             <div className="store-header">
@@ -44,7 +50,7 @@ function StoreMainPage() {
             <div className="special-offers">
                 <h2>Oferte Speciale</h2>
                 <p>Nu rata ofertele noastre exclusive!</p>
-                <button>Vezi Ofertele</button>
+                <button onClick={handleClick}>Vezi Ofertele</button>
             </div>
         </div>
     );

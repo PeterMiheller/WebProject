@@ -2,15 +2,29 @@ import { useState } from 'react';
 import './Settings.css';  // CSS extern
 
 function Settings() {
+
     const [settings, setSettings] = useState({
         notifications: true,
-        newsletter: false,
-        language: 'ro',
-        theme: 'light'
+        newsletter: true,
+        modifyPersonalData: false,
+        password: ''
     });
+
+    const [savedMessage, setSavedMessage] = useState('');
 
     const handleSettingChange = (key, value) => {
         setSettings(prev => ({ ...prev, [key]: value }));
+    };
+
+    const handleSaveSettings = () => {
+        setSavedMessage('Setările au fost salvate cu succes!');
+        setTimeout(() => setSavedMessage(''), 3000);
+    };
+
+    const handleLogout = () => {
+        if (window.confirm('Ești sigur că vrei să te deconectezi?')) {
+            window.location.href = 'http://localhost:5173/'; // redirecționează la pagina de login
+        }
     };
 
     return (
@@ -18,13 +32,13 @@ function Settings() {
             <h1 className="settings-title">Setări</h1>
 
             <div className="settings-box">
+
                 <div className="settings-item">
                     <div className="settings-text">
                         <h3>Notificări</h3>
                         <p>Primește notificări despre comenzi și oferte</p>
                     </div>
                     <label className="settings-switch">
-                        <span className="switch-label">Activat</span>
                         <input
                             type="checkbox"
                             checked={settings.notifications}
@@ -39,7 +53,6 @@ function Settings() {
                         <p>Abonează-te la newsletter pentru ultimele noutăți</p>
                     </div>
                     <label className="settings-switch">
-                        <span className="switch-label">Activat</span>
                         <input
                             type="checkbox"
                             checked={settings.newsletter}
@@ -49,35 +62,51 @@ function Settings() {
                 </div>
 
                 <div className="settings-item">
-                    <h3>Limba</h3>
-                    <select
-                        value={settings.language}
-                        onChange={(e) => handleSettingChange('language', e.target.value)}
-                        className="settings-select"
-                    >
-                        <option value="ro">Română</option>
-                        <option value="en">English</option>
-                        <option value="fr">Français</option>
-                    </select>
+                    <div className="settings-text">
+                        <h3>Modifică date personale</h3>
+                        <p>Bifează dacă dorești să modifici parola</p>
+                    </div>
+                    <label className="settings-switch">
+                        <input
+                            type="checkbox"
+                            checked={settings.modifyPersonalData}
+                            onChange={(e) => handleSettingChange('modifyPersonalData', e.target.checked)}
+                        />
+                    </label>
                 </div>
 
-                <div className="settings-item">
-                    <h3>Temă</h3>
-                    <select
-                        value={settings.theme}
-                        onChange={(e) => handleSettingChange('theme', e.target.value)}
-                        className="settings-select"
-                    >
-                        <option value="light">Luminos</option>
-                        <option value="dark">Întunecat</option>
-                        <option value="auto">Automat</option>
-                    </select>
-                </div>
+                {settings.modifyPersonalData && (
+                    <div className="settings-item">
+                        <div className="settings-text">
+                            <h3>Parolă nouă</h3>
+                        </div>
+                        <input
+                            type="password"
+                            placeholder="Introdu parola nouă"
+                            value={settings.password}
+                            onChange={(e) => handleSettingChange('password', e.target.value)}
+                            className="settings-input"
+                        />
+                    </div>
+                )}
 
                 <div className="settings-buttons">
-                    <button className="btn btn-primary">Salvează Setările</button>
-                    <button className="btn btn-secondary">Resetează</button>
+                    <button className="btn btn-primary" onClick={handleSaveSettings}>Salvează Setările</button>
+                    <button className="btn btn-secondary" onClick={() => setSettings({
+                        notifications: true,
+                        newsletter: true,
+                        modifyPersonalData: false,
+                        password: ''
+                    })}>Resetează la setările inițiale</button>
                 </div>
+
+                <button className="btn btn-danger logout-btn" onClick={handleLogout}>Deconectează-te</button>
+
+                {savedMessage && (
+                    <div className="saved-message">
+                        ✅ {savedMessage}
+                    </div>
+                )}
             </div>
         </div>
     );

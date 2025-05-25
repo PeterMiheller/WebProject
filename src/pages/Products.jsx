@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Products.css";
 
 function Products({cartItems, setCartItems}) {
+    const [showNotification, setShowNotification] = useState(false);
     const products = [
         { id: 1, name: "Laptop Gaming", price: 2999, image: "/api/placeholder/300/200" },
         { id: 2, name: "Smartphone", price: 1499, image: "/api/placeholder/300/200" },
@@ -23,11 +24,20 @@ function Products({cartItems, setCartItems}) {
         else {
             setCartItems([...cartItems, {id, name, price, quantity: 1}]);
         }
+
+        setShowNotification(true);
+        setTimeout(() => setShowNotification(false), 2000);
     }
 
     return (
         <div className="products-container">
             <h1>Produsele Noastre</h1>
+
+            {showNotification && (
+                <div className="notification">
+                    Produs adăugat cu succes în coș!
+                </div>
+            )}
 
             <div className="products-grid">
                 {products.map(product => (

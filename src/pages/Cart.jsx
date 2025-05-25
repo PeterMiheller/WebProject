@@ -1,11 +1,17 @@
 // import React, { useState } from "react";
 import "./Cart.css";
+import {useNavigate} from "react-router-dom";
 
 function Cart({cartItems,setCartItems}) {
     // const [cartItems, setCartItems] = useState([
     //     { id: 1, name: "Laptop Gaming", price: 2999, quantity: 1 },
     //     { id: 2, name: "Smartphone", price: 1499, quantity: 2 },
     // ]);
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/products");
+    }
 
     const updateQuantity = (id, newQuantity) => {
         if (newQuantity === 0) {
@@ -25,7 +31,7 @@ function Cart({cartItems,setCartItems}) {
             {cartItems.length === 0 ? (
                 <div className="cart-empty">
                     <p>Coșul tău este gol</p>
-                    <button className="btn btn-primary">Continuă Cumpărăturile</button>
+                    <button className="btn btn-primary" onClick={handleClick}>Continuă Cumpărăturile</button>
                 </div>
             ) : (
                 <div className="cart-box">
