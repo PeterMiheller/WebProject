@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Settings.css';  // CSS extern
 
+
 function Settings() {
 
     const [settings, setSettings] = useState({
@@ -26,6 +27,28 @@ function Settings() {
             window.location.href = 'http://localhost:5173/'; // redirecționează la pagina de login
         }
     };
+
+    const passwordChange = async () => {
+        const currentUserEmail = localStorage.getItem('email');
+        console.log(currentUserEmail);
+        console.log(settings.password);
+
+        const response = await fetch('http://localhost:8080/api/change-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email:currentUserEmail,
+                password: settings.password
+            })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            setSavedMessage('Parola a fost schimbată cu succes!');
+        } else {
+            setSavedMessage(data.message || 'Eroare la schimbarea parolei');
+        }
+    }
 
     return (
         <div className="settings-container">
@@ -87,6 +110,7 @@ function Settings() {
                             onChange={(e) => handleSettingChange('password', e.target.value)}
                             className="settings-input"
                         />
+                        <button className="btn btn-secondary" onClick={()=>passwordChange()}>Change password</button>
                     </div>
                 )}
 

@@ -20,11 +20,14 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
             body: JSON.stringify({ email, password })
         });
         const data = await response.json();
-        if(data.message === 'Login successful') {
-            setIsAuthenticated(true);
+        console.log(data.email)
+        if(data.message === 'Invalid credentials') {
+            alert(data.message);
+
         }
         else{
-            alert(data.message);
+            localStorage.setItem('email', data.email);
+            setIsAuthenticated(true);
         }
     }
 
