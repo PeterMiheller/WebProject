@@ -6,7 +6,6 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const [message, setMessage] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -21,9 +20,11 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
             body: JSON.stringify({ email, password })
         });
         const data = await response.json();
-        setMessage(data.message);
         if(data.message === 'Login successful') {
             setIsAuthenticated(true);
+        }
+        else{
+            alert(data.message);
         }
     }
 
@@ -60,7 +61,6 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
                 <button type="submit" className="login-button">
                     Autentifică-te
                 </button>
-                {message && <p>{message}</p>}
             </form>
             <p className="create-account">
                 Nu ai cont? <a href="/register">Creează unul</a>

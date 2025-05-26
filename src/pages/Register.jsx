@@ -11,7 +11,6 @@ function Register() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [agreeTerms, setAgreeTerms] = useState(false)
-    const [message, setMessage] = useState('');
 
     const navigate = useNavigate()
 
@@ -41,7 +40,10 @@ function Register() {
         });
 
         const data = await response.json();
-        setMessage(data.message);
+        if(data.message==='User already exists'){
+            alert(data.message)
+            return;
+        }
 
         // În mod real, aici s-ar trimite datele către un backend
         navigate('/')
@@ -141,7 +143,6 @@ function Register() {
                 <button type="submit" className="login-button">
                     Salvează
                 </button>
-                {message && <p>{message}</p>}
             </form>
             <p className="create-account">
                 Ai deja cont? <a href="/">Autentifică-te</a>
