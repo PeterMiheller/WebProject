@@ -7,6 +7,7 @@ import Settings from './pages/Settings'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute'
 import Register from './pages/Register'
+import Payment from "./pages/Payment.jsx";
 import { useState } from 'react'
 
 function App() {
@@ -52,6 +53,13 @@ function App() {
                     element={
                         <ProtectedRoute isAuthenticated={isAuthenticated}>
                             <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/payment" element={
+                        <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <Payment />
                         </ProtectedRoute>
                     }
                 />

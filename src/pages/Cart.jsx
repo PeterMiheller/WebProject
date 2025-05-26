@@ -13,6 +13,10 @@ function Cart({cartItems,setCartItems}) {
         navigate("/products");
     }
 
+    const handleCheckout = () => {
+        navigate("/payment");
+    }
+
     const updateQuantity = (id, newQuantity) => {
         if (newQuantity === 0) {
             setCartItems(cartItems.filter(item => item.id !== id));
@@ -66,7 +70,7 @@ function Cart({cartItems,setCartItems}) {
                         <span className="total-label">Total:</span>
                         <span className="total-amount">{total} lei</span>
                     </div>
-                    <button className="btn btn-success">Finalizează Comanda</button>
+                    <button className="btn btn-success" onClick={handleCheckout}>Finalizează Comanda</button>
                 </div>
             )}
         </div>

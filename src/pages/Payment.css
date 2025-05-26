@@ -1,0 +1,331 @@
+/* Container principal */
+.checkout-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header */
+.checkout-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.checkout-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 8px 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.checkout-subtitle {
+    color: #718096;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Formularul */
+.checkout-form {
+    background: white;
+    padding: 30px;
+}
+
+/* Secțiuni */
+.section {
+    margin-bottom: 35px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.section-icon {
+    font-size: 1.5rem;
+}
+
+/* Grupuri de câmpuri */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-control::placeholder {
+    color: #9ca3af;
+}
+
+/* Rânduri de câmpuri */
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.w-45 {
+    flex: 1;
+}
+
+/* Opțiuni de plată */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.payment-option {
+    display: block;
+    padding: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    position: relative;
+}
+
+.payment-option:hover {
+    border-color: #667eea;
+    background: #f8faff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.payment-option.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+}
+
+.payment-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.payment-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.payment-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.payment-info p {
+    margin: 0;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+/* Detalii card */
+.card-details {
+    background: #f8faff;
+    padding: 25px;
+    border-radius: 16px;
+    border: 2px solid #e8f2ff;
+    margin-top: 20px;
+}
+
+.card-details-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-details-title::before {
+    content: "🔒";
+    font-size: 1.2rem;
+}
+
+/* Butonul principal */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn.processing {
+    background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+}
+
+/* Spinner de încărcare */
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Margini */
+.mt-4 {
+    margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkout-container {
+        margin: 20px;
+        border-radius: 16px;
+    }
+
+    .checkout-header {
+        padding: 25px 20px;
+    }
+
+    .checkout-form {
+        padding: 25px 20px;
+    }
+
+    .checkout-title {
+        font-size: 1.8rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .w-45 {
+        width: 100%;
+    }
+
+    .payment-content {
+        gap: 12px;
+    }
+
+    .payment-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-container {
+        margin: 10px;
+    }
+
+    .checkout-header {
+        padding: 20px 15px;
+    }
+
+    .checkout-form {
+        padding: 20px 15px;
+    }
+
+    .checkout-title {
+        font-size: 1.6rem;
+    }
+}
