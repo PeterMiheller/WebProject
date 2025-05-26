@@ -6,13 +6,25 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const [message, setMessage] = useState('');
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
         // Aici poți adăuga validări reale
         console.log('Email:', email)
         console.log('Password:', password)
-        setIsAuthenticated(true)
+
+
+        const response = await fetch('http://localhost:8080/api/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        setMessage(data.message);
+        if(data.message === 'Login successful') {
+            setIsAuthenticated(true);
+        }
     }
 
     useEffect(() => {
@@ -48,6 +60,7 @@ function Login({ setIsAuthenticated, isAuthenticated }) {
                 <button type="submit" className="login-button">
                     Autentifică-te
                 </button>
+                {message && <p>{message}</p>}
             </form>
             <p className="create-account">
                 Nu ai cont? <a href="/register">Creează unul</a>
