@@ -68,7 +68,7 @@ function Products() {
             <div className="products-grid">
                 {products.map(product => (
                     <div key={product.id} className="product-card">
-                        <img src={product.image} alt={product.name}/>
+                        <img src={`http://localhost:8080/poze/${product.image}`} alt={product.name}/>
                         <div className="product-info">
                             <h3>{product.name}</h3>
                             <p className="price">{product.price} lei</p>
