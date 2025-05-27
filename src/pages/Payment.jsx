@@ -158,7 +158,7 @@ const Payment = () => {
                                 <div className="payment-icon">💳</div>
                                 <div className="payment-info">
                                     <h4>Card de Credit/Debit</h4>
-                                    <p>Visa, MasterCard, American Express</p>
+                                    <p>Visa, MasterCard</p>
                                 </div>
                             </div>
                         </label>

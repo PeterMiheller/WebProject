@@ -110,7 +110,7 @@ function Settings() {
                             onChange={(e) => handleSettingChange('password', e.target.value)}
                             className="settings-input"
                         />
-                        <button className="btn btn-secondary" onClick={()=>passwordChange()}>Change password</button>
+                        <button className="btn btn-secondary" onClick={()=>passwordChange()}>Schimbă parola</button>
                     </div>
                 )}
 
