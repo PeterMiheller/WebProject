@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./Products.css";
 
-function Products({cartItems, setCartItems}) {
+function Products() {
     const [showNotification, setShowNotification] = useState(false);
     const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -17,7 +17,6 @@ function Products({cartItems, setCartItems}) {
         fetchProducts();
     }, []);
 
-    console.log(products);
     //     [
     //     { id: 1, name: "Laptop Gaming", price: 2999, image: "/api/placeholder/300/200" },
     //     { id: 2, name: "Smartphone", price: 1499, image: "/api/placeholder/300/200" },
@@ -28,17 +27,30 @@ function Products({cartItems, setCartItems}) {
     // ];
 
     function addToCart(product) {
-        const {id, name, price} = product;
-        console.log(product);
-        let quantity;
-        if ((quantity = cartItems.find(item => item.id === id)?.quantity)) {
-            setCartItems(cartItems.map(item =>
-                item.id === id ? {...item, quantity: quantity + 1} : item
-            ));
-        } else {
-            setCartItems([...cartItems, {id, name, price, quantity: 1}]);
+        const id = product.id;
+        // console.log(product);
+        // let quantity;
+        // if ((quantity = cartItems.find(item => item.id === id)?.quantity)) {
+        //     setCartItems(cartItems.map(item =>
+        //         item.id === id ? {...item, quantity: quantity + 1} : item
+        //     ));
+        // } else {
+        //     setCartItems([...cartItems, {id, name, price, quantity: 1}]);
+        // }
+        const currentUserEmail = localStorage.getItem('email');
+        const productToCart = async () => {
+            const response = await fetch('http://localhost:8080/cart/cart-items', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userEmail: currentUserEmail,
+                    productId: id
+                })
+            });
+            const data = await response.json();
+            console.log(data.message);
         }
-
+        productToCart();
         setShowNotification(true);
         setTimeout(() => setShowNotification(false), 2000);
     }

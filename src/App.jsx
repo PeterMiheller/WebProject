@@ -52,7 +52,7 @@ function App() {
                     path="/cart"
                     element={
                         <ProtectedRoute isAuthenticated={isAuthenticated}>
-                            <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                            <Cart/>
                         </ProtectedRoute>
                     }
                 />

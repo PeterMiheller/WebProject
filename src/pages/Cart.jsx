@@ -1,13 +1,26 @@
 // import React, { useState } from "react";
 import "./Cart.css";
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-function Cart({cartItems,setCartItems}) {
-    // const [cartItems, setCartItems] = useState([
-    //     { id: 1, name: "Laptop Gaming", price: 2999, quantity: 1 },
-    //     { id: 2, name: "Smartphone", price: 1499, quantity: 2 },
-    // ]);
+function Cart() {
+    const [cartItems, setCartItems] = useState([]);
     const navigate = useNavigate();
+    const currentUser = localStorage.getItem('email');
+    useEffect(() => {
+        
+        const fetchCart = async () => {
+            const response = await fetch(`http://localhost:8080/cart/cart-items/${currentUser}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            console.log(data);
+            setCartItems(data);
+        };
+
+        fetchCart();
+    }, [currentUser]);
 
     const handleClick = () => {
         navigate("/products");
@@ -17,17 +30,48 @@ function Cart({cartItems,setCartItems}) {
         navigate("/payment");
     }
 
-    const updateQuantity = (id, newQuantity) => {
-        if (newQuantity === 0) {
-            setCartItems(cartItems.filter(item => item.id !== id));
-        } else {
-            setCartItems(cartItems.map(item =>
-                item.id === id ? { ...item, quantity: newQuantity } : item
-            ));
+    const addQuantity = (productId,quantity) => {
+        const productToCart = async () => {
+            const response = await fetch('http://localhost:8080/cart/cart-items', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userEmail: currentUser,
+                    productId: productId,
+                    quantity: quantity
+                })
+            });
+            const data = await response.json();
+            console.log(data.message);
+
+            const refreshed = await fetch(`http://localhost:8080/cart/cart-items/${currentUser}`);
+            const updatedItems = await refreshed.json();
+            setCartItems(updatedItems);
         }
+        productToCart();
+    };
+    const substractQuantity = (productId,quantity) => {
+        const productToCart = async () => {
+            const response = await fetch('http://localhost:8080/cart/cart-items', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userEmail: currentUser,
+                    productId: productId,
+                    quantity: quantity
+                })
+            });
+            const data = await response.json();
+            console.log(data.message);
+
+            const refreshed = await fetch(`http://localhost:8080/cart/cart-items/${currentUser}`);
+            const updatedItems = await refreshed.json();
+            setCartItems(updatedItems);
+        }
+        productToCart();
     };
 
-    const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
 
     return (
         <div className="cart-container">
@@ -40,14 +84,14 @@ function Cart({cartItems,setCartItems}) {
             ) : (
                 <div className="cart-box">
                     {cartItems.map(item => (
-                        <div key={item.id} className="cart-item">
+                        <div key={item.product.name} className="cart-item">
                             <div>
-                                <h3 className="item-name">{item.name}</h3>
-                                <p className="item-price">{item.price} lei</p>
+                                <h3 className="item-name">{item.product.name}</h3>
+                                <p className="item-price">{item.product.price} lei</p>
                             </div>
                             <div className="quantity-control">
                                 <button
-                                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                    onClick={() => substractQuantity(item.product.id,item.quantity-1)}
                                     className="qty-btn"
                                     aria-label={`Scade cantitatea pentru ${item.name}`}
                                 >
@@ -55,14 +99,14 @@ function Cart({cartItems,setCartItems}) {
                                 </button>
                                 <span className="qty-number">{item.quantity}</span>
                                 <button
-                                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                    onClick={() => addQuantity(item.product.id,item.quantity+1)}
                                     className="qty-btn"
-                                    aria-label={`Crește cantitatea pentru ${item.name}`}
+                                    aria-label={`Crește cantitatea pentru ${item.product.name}`}
                                 >
                                     +
                                 </button>
                             </div>
-                            <p className="item-total">{item.price * item.quantity} lei</p>
+                            <p className="item-total">{item.product.price * item.quantity} lei</p>
                         </div>
                     ))}
 
